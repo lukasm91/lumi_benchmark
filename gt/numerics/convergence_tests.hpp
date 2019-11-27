@@ -15,7 +15,7 @@ template <class CommWorld> void run_convergence_tests(CommWorld &&comm_world) {
     auto error_f = [&comm_world, exact](std::size_t resolution) {
       auto comm_grid =
           communication::grid(comm_world, {resolution, resolution, resolution});
-      return run(std::move(comm_grid), hdiff_stepper(exact.diffusion_coeff),
+      return run(comm_grid, hdiff_stepper(exact.diffusion_coeff),
                  1e-4, 1e-5, exact);
     };
     print_order_verification_result(order_verification(error_f, 8, 128));
@@ -26,7 +26,7 @@ template <class CommWorld> void run_convergence_tests(CommWorld &&comm_world) {
     auto error_f = [&comm_world, exact](std::size_t resolution) {
       auto comm_grid =
           communication::grid(comm_world, {resolution, resolution, resolution});
-      return run(std::move(comm_grid), hdiff_stepper(exact.diffusion_coeff),
+      return run(comm_grid, hdiff_stepper(exact.diffusion_coeff),
                  1e-2, 1e-3 / resolution, exact);
     };
     print_order_verification_result(order_verification(error_f, 8, 64));
@@ -38,7 +38,7 @@ template <class CommWorld> void run_convergence_tests(CommWorld &&comm_world) {
     auto error_f = [&comm_world, exact](std::size_t resolution) {
       auto comm_grid =
           communication::grid(comm_world, {resolution, resolution, resolution});
-      return run(std::move(comm_grid), vdiff_stepper(exact.diffusion_coeff),
+      return run(comm_grid, vdiff_stepper(exact.diffusion_coeff),
                  1e-4, 1e-5, exact);
     };
     print_order_verification_result(order_verification(error_f, 8, 128));
@@ -49,7 +49,7 @@ template <class CommWorld> void run_convergence_tests(CommWorld &&comm_world) {
     auto error_f = [&comm_world, exact](std::size_t resolution) {
       auto comm_grid =
           communication::grid(comm_world, {resolution, resolution, resolution});
-      return run(std::move(comm_grid), vdiff_stepper(exact.diffusion_coeff),
+      return run(comm_grid, vdiff_stepper(exact.diffusion_coeff),
                  1e-2, 1e-3 / resolution, exact);
     };
     print_order_verification_result(order_verification(error_f, 8, 64));
@@ -61,7 +61,7 @@ template <class CommWorld> void run_convergence_tests(CommWorld &&comm_world) {
     auto error_f = [&comm_world, exact](std::size_t resolution) {
       auto comm_grid =
           communication::grid(comm_world, {resolution, resolution, resolution});
-      return run(std::move(comm_grid), diff_stepper(exact.diffusion_coeff),
+      return run(comm_grid, diff_stepper(exact.diffusion_coeff),
                  1e-4, 1e-5, exact);
     };
     print_order_verification_result(order_verification(error_f, 8, 128));
@@ -72,7 +72,7 @@ template <class CommWorld> void run_convergence_tests(CommWorld &&comm_world) {
     auto error_f = [&comm_world, exact](std::size_t resolution) {
       auto comm_grid =
           communication::grid(comm_world, {resolution, resolution, resolution});
-      return run(std::move(comm_grid), diff_stepper(exact.diffusion_coeff),
+      return run(comm_grid, diff_stepper(exact.diffusion_coeff),
                  1e-2, 1e-3 / resolution, exact);
     };
     print_order_verification_result(order_verification(error_f, 8, 64));
@@ -84,7 +84,7 @@ template <class CommWorld> void run_convergence_tests(CommWorld &&comm_world) {
     auto error_f = [&comm_world, exact](std::size_t resolution) {
       auto comm_grid =
           communication::grid(comm_world, {resolution, resolution, resolution});
-      return run(std::move(comm_grid), hadv_stepper(), 1e-5, 1e-6, exact);
+      return run(comm_grid, hadv_stepper(), 1e-5, 1e-6, exact);
     };
     print_order_verification_result(order_verification(error_f, 8, 128));
   }
@@ -94,7 +94,7 @@ template <class CommWorld> void run_convergence_tests(CommWorld &&comm_world) {
     auto error_f = [&comm_world, exact](std::size_t resolution) {
       auto comm_grid =
           communication::grid(comm_world, {resolution, resolution, resolution});
-      return run(std::move(comm_grid), hadv_stepper(), 1e-4, 1e-5 / resolution,
+      return run(comm_grid, hadv_stepper(), 1e-4, 1e-5 / resolution,
                  exact);
     };
     print_order_verification_result(order_verification(error_f, 8, 64));
@@ -106,7 +106,7 @@ template <class CommWorld> void run_convergence_tests(CommWorld &&comm_world) {
     auto error_f = [&comm_world, exact](std::size_t resolution) {
       auto comm_grid =
           communication::grid(comm_world, {resolution, resolution, resolution});
-      return run(std::move(comm_grid), vadv_stepper(), 1e-5, 1e-6, exact);
+      return run(comm_grid, vadv_stepper(), 1e-5, 1e-6, exact);
     };
     print_order_verification_result(order_verification(error_f, 8, 128));
   }
@@ -116,7 +116,7 @@ template <class CommWorld> void run_convergence_tests(CommWorld &&comm_world) {
     auto error_f = [&comm_world, exact](std::size_t resolution) {
       auto comm_grid =
           communication::grid(comm_world, {resolution, resolution, resolution});
-      return run(std::move(comm_grid), vadv_stepper(), 1e-4, 1e-5 / resolution,
+      return run(comm_grid, vadv_stepper(), 1e-4, 1e-5 / resolution,
                  exact);
     };
     print_order_verification_result(order_verification(error_f, 8, 64));
@@ -128,7 +128,7 @@ template <class CommWorld> void run_convergence_tests(CommWorld &&comm_world) {
     auto error_f = [&comm_world, exact](std::size_t resolution) {
       auto comm_grid =
           communication::grid(comm_world, {resolution, resolution, resolution});
-      return run(std::move(comm_grid), rkadv_stepper(), 1e-5, 1e-6, exact);
+      return run(comm_grid, rkadv_stepper(), 1e-5, 1e-6, exact);
     };
     print_order_verification_result(order_verification(error_f, 8, 128));
   }
@@ -138,7 +138,7 @@ template <class CommWorld> void run_convergence_tests(CommWorld &&comm_world) {
     auto error_f = [&comm_world, exact](std::size_t resolution) {
       auto comm_grid =
           communication::grid(comm_world, {resolution, resolution, resolution});
-      return run(std::move(comm_grid), rkadv_stepper(), 1e-4, 1e-5 / resolution,
+      return run(comm_grid, rkadv_stepper(), 1e-4, 1e-5 / resolution,
                  exact);
     };
     print_order_verification_result(order_verification(error_f, 8, 64));
@@ -150,7 +150,7 @@ template <class CommWorld> void run_convergence_tests(CommWorld &&comm_world) {
     auto error_f = [&comm_world, exact](std::size_t resolution) {
       auto comm_grid =
           communication::grid(comm_world, {resolution, resolution, resolution});
-      return run(std::move(comm_grid), full_stepper(exact.diffusion_coeff),
+      return run(comm_grid, full_stepper(exact.diffusion_coeff),
                  1e-5, 1e-6, exact);
     };
 
@@ -162,9 +162,10 @@ template <class CommWorld> void run_convergence_tests(CommWorld &&comm_world) {
     auto error_f = [&comm_world, exact](std::size_t resolution) {
       auto comm_grid =
           communication::grid(comm_world, {resolution, resolution, resolution});
-      return run(std::move(comm_grid), full_stepper(exact.diffusion_coeff),
+      return run(comm_grid, full_stepper(exact.diffusion_coeff),
                  1e-4, 1e-5 / resolution, exact);
     };
     print_order_verification_result(order_verification(error_f, 8, 64));
   }
 }
+
