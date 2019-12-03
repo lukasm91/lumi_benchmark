@@ -149,7 +149,9 @@ struct world {
   moved_bit m_moved;
 
   world(int &argc, char **&argv) {
-    MPI_Init(&argc, &argv);
+    //MPI_Init(&argc, &argv);
+    int provided;
+    MPI_Init_thread(&argc, &argv, MPI_THREAD_MULTIPLE, &provided);
 
     int size, rank;
     MPI_Comm_size(MPI_COMM_WORLD, &size);
@@ -293,6 +295,7 @@ std::function<void(storage_t &)>
 comm_halo_exchanger(grid &grid, storage_t::storage_info_t const &sinfo);
 
 double comm_global_max(grid const &grid, double t);
+double comm_global_max(world const &w, double t);
 
 } // namespace ghex_comm
 
