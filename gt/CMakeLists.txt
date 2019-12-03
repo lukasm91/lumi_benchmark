@@ -1,9 +1,6 @@
 cmake_minimum_required(VERSION 3.14.5)
 project(lumi-benchmark LANGUAGES CXX)
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
-
-find_package(GridTools 1.1.0 REQUIRED)
 find_package(MPI REQUIRED COMPONENTS CXX)
 
 # User options
@@ -32,9 +29,8 @@ add_library(common INTERFACE)
 
 # Global setup
 if(GTBENCH_COMMUNICATION_BACKEND STREQUAL "ghex_comm")
-  # TODO: proper CMake for GHEX
   find_package(GHEX REQUIRED)
-  target_link_libraries(common INTERFACE GHEX::ghex)
+  target_link_libraries(common INTERFACE GHEX::ghexlib)
   target_compile_definitions(common INTERFACE GTBENCH_USE_GHEX)
 endif()
 
