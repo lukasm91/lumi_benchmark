@@ -39,6 +39,7 @@ target_compile_definitions(common INTERFACE
   GTBENCH_FLOAT=${GTBENCH_FLOAT}
   GTBENCH_COMMUNICATION_BACKEND=${GTBENCH_COMMUNICATION_BACKEND}
   )
+target_compile_options(common INTERFACE $<$<COMPILE_LANGUAGE:CUDA>:-gencode arch=compute_60,code=sm_60>)
 
 # Subdirectories
 add_subdirectory(communication)
